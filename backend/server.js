@@ -3,11 +3,13 @@ import { config } from 'dotenv';
 import connectDB from './config/db.js';
 import productRoutes from './routes/productRoutes.js'
 import { errorHandler, notFound } from './middleware/errorMiddleware.js'
-
+import cors from 'cors';
 config();
 connectDB()
 
 const app = express();
+
+app.use(cors())
 
 
 app.get('/', (req, res) => {

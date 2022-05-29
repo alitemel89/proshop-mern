@@ -1,20 +1,24 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
-import axios from 'axios';
 import Rating from '../components/Rating';
+import { useGetSingleProductQuery } from '../services/productsApi';
 
 const ProductScreen = () => {
     const [product, setProduct] = useState([])
     const { id } = useParams();
 
+    const { data: singleProduct, isLoading } = useGetSingleProductQuery(id)
+
+
     useEffect(() => {
-        const fetchProduct = async () => {
-            const { data } = await axios.get(`/api/products/${id}`);
-            setProduct(data);
+        if (singleProduct) {
+            setProduct(singleProduct)
         }
-        fetchProduct();
-    }, [id]);
+
+    }, [singleProduct]);
+
+    if (isLoading) return <p>Loading...</p>
 
     return (
         <>
