@@ -3,9 +3,11 @@ import { Link, useParams } from 'react-router-dom';
 import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { useGetSingleProductQuery } from '../services/productsApi';
+import { Form } from 'react-bootstrap';
 
 const ProductScreen = () => {
     const [product, setProduct] = useState([])
+    const [qty, setQty] = useState(1)
     const { id } = useParams();
 
     const { data: singleProduct, isLoading } = useGetSingleProductQuery(id)
@@ -68,6 +70,29 @@ const ProductScreen = () => {
                                     </Col>
                                 </Row>
                             </ListGroup.Item>
+
+                            {product.countInStock > 0 && (
+                                <ListGroup.Item>
+                                    <Row>
+                                        <Col>Qty</Col>
+                                        <Col>
+                                            <Form.Control
+                                                as='select'
+                                                value={qty}
+                                                onChange={(e) => setQty(e.target.value)}
+                                            >
+                                                {[...Array(product.countInStock).keys()].map(
+                                                    (x) => (
+                                                        <option key={x + 1} value={x + 1}>
+                                                            {x + 1}
+                                                        </option>
+                                                    )
+                                                )}
+                                            </Form.Control>
+                                        </Col>
+                                    </Row>
+                                </ListGroup.Item>
+                            )}
 
                             <ListGroup.Item>
                                 <Button className='btn-block' type="button" disabled={product.countInStock === 0}>

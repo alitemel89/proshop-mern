@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { Row, Col } from 'react-bootstrap';
 import Product from '../components/Product';
+import Spinner from '../components/Spinner';
 import { useGetProductsQuery } from '../services/productsApi';
 
 const HomeScreen = () => {
@@ -16,7 +17,7 @@ const HomeScreen = () => {
 
     }, [productsList])
 
-    if (isLoading) return <p>Loading...</p>
+    if (isLoading) return <Spinner />
 
     return (
         <>
