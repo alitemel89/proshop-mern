@@ -4,12 +4,16 @@ import { Row, Col, Image, ListGroup, Card, Button } from 'react-bootstrap';
 import Rating from '../components/Rating';
 import { useGetSingleProductQuery } from '../services/productsApi';
 import { Form } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../services/cartSlice';
+import Spinner from '../components/Spinner';
+
 
 const ProductScreen = () => {
     const [product, setProduct] = useState([])
     const [qty, setQty] = useState(1)
     const { id } = useParams();
-
+    const dispatch = useDispatch();
     const { data: singleProduct, isLoading } = useGetSingleProductQuery(id)
 
 
@@ -20,7 +24,11 @@ const ProductScreen = () => {
 
     }, [singleProduct]);
 
-    if (isLoading) return <p>Loading...</p>
+    const handleAddToCart = (product) => {
+        dispatch(addToCart(product))
+    }
+
+    if (isLoading) return <Spinner />
 
     return (
         <>
@@ -95,7 +103,11 @@ const ProductScreen = () => {
                             )}
 
                             <ListGroup.Item>
-                                <Button className='btn-block' type="button" disabled={product.countInStock === 0}>
+                                <Button
+                                    className='btn-block'
+                                    type="button"
+                                    disabled={product.countInStock === 0}
+                                    onClick={() => handleAddToCart(product)}>
                                     Add to Cart
                                 </Button>
                             </ListGroup.Item>
