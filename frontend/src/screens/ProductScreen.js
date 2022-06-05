@@ -7,12 +7,14 @@ import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { addToCart } from '../services/cartSlice';
 import Spinner from '../components/Spinner';
+import { createBrowserHistory } from 'history';
 
 
 const ProductScreen = () => {
     const [product, setProduct] = useState([])
     const [qty, setQty] = useState(1)
     const { id } = useParams();
+    const history = createBrowserHistory();
     const dispatch = useDispatch();
     const { data: singleProduct, isLoading } = useGetSingleProductQuery(id)
 
@@ -25,7 +27,8 @@ const ProductScreen = () => {
     }, [singleProduct]);
 
     const handleAddToCart = (product) => {
-        dispatch(addToCart(product))
+        dispatch(addToCart(product)) 
+        history.push(`/cart/${id}?qty=${qty}`)      
     }
 
     if (isLoading) return <Spinner />
