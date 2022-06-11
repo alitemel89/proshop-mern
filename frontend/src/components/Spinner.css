@@ -24,7 +24,7 @@
   width: 25px;
   height: 25px;
   border-radius: 50%;
-  background-color: #013220;
+  background-color: #333;
   animation: bounce 0.5s alternate infinite;
 }
 
@@ -42,7 +42,7 @@
     -webkit-box-shadow: 10px 58px 74px 0px #333;
     -moz-box-shadow: 10px 58px 74px 0px #333;
     box-shadow: 10px 58px 74px 0px #333;
-    background-color: green;
+    background-color: #555;
   }
   to {
     transform: translateY(-50px) scaleX(1);

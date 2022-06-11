@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
+
 const initialState = {
     cartItems: [],
     cartTotalQuantity: 0,
@@ -17,9 +18,12 @@ const cartSlice = createSlice({
 
             if (itemIndex >= 0) {
                 state.cartItems[itemIndex].cartQuantity += 1
+
+
             } else {
                 const tempProduct = { ...action.payload, cartQuantity: 1 };
                 state.cartItems.push(tempProduct)
+
             }
 
             localStorage.setItem("cartItems", JSON.stringify(state.cartItems));

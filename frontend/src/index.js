@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './bootstrap.min.css';
 import './index.css';
+import 'animate.css';
 import App from './App';
 import store from './store';
 import { Provider } from 'react-redux';

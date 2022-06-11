@@ -1,19 +1,24 @@
 import React from 'react'
-import { Col, Image, Form, Row, ListGroup } from 'react-bootstrap';
+import { Col, Image, Form, Row, ListGroup, Card, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import Message from '../components/Message';
 import { Link } from 'react-router-dom';
 import { addToCart, removeFromCart } from '../services/cartSlice';
-import { Button } from 'react-bootstrap';
+import { useNavigate } from 'react-router-dom';
+
 
 
 const CartScreen = () => {
   const { cartItems } = useSelector((state) => state.cart);
   const dispatch = useDispatch();
+  let navigate = useNavigate();
 
   const removeFromCartHandler = (id) => {
     dispatch(removeFromCart(id))
-    console.log(cartItems);
+  }
+
+  const checkoutHandler = () => {
+    navigate('/login?redirect=shipping');
   }
 
   return (
@@ -62,6 +67,31 @@ const CartScreen = () => {
             </ListGroup>
           )
         }
+      </Col>
+      <Col md={4}>
+        <Card>
+          <ListGroup variant='flush'>
+            <ListGroup.Item>
+              <h2>Subtotal ({cartItems.reduce((acc, item) => acc + item.cartQuantity, 0)})
+                items</h2>
+              $
+              {cartItems
+                .reduce((acc, item) => acc + item.cartQuantity * item.price, 0)
+                .toFixed(2)}
+            </ListGroup.Item>
+
+            <ListGroup.Item>
+              <Button
+                type='button'
+                className='btn-block'
+                disabled={cartItems.length === 0}
+                onClick={checkoutHandler}
+              >
+                Proceed To Checkout
+              </Button>
+            </ListGroup.Item>
+          </ListGroup>
+        </Card>
       </Col>
     </Row>
   )
