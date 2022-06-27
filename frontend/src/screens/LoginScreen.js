@@ -3,7 +3,6 @@ import { Link, useNavigate } from 'react-router-dom';
 import { Form, Button, Row, Col } from 'react-bootstrap';
 import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
-import { toast } from 'react-toastify'
 import Spinner from '../components/Spinner';
 import { login, reset } from '../services/authSlice';
 
@@ -24,7 +23,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (isError) {
-      toast.error(message)
+      console.log('Invalid Credentials');
     }
 
     if (isSuccess || user) {
@@ -66,7 +65,6 @@ const LoginScreen = () => {
           <Form.Control
             type='email'
             className='form-control'
-            id='email'
             name='email'
             value={email}
             placeholder='Enter your email'
@@ -79,7 +77,6 @@ const LoginScreen = () => {
           <Form.Control
             type='password'
             className='form-control'
-            id='password'
             name='password'
             value={password}
             placeholder='Enter password'
