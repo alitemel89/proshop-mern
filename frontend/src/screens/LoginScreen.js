@@ -5,6 +5,9 @@ import FormContainer from '../components/FormContainer';
 import { useDispatch, useSelector } from 'react-redux';
 import Spinner from '../components/Spinner';
 import { login, reset } from '../services/authSlice';
+import Message from '../components/Message';
+
+
 
 const LoginScreen = () => {
   const [formData, setFormData] = useState({
@@ -22,15 +25,15 @@ const LoginScreen = () => {
   )
 
   useEffect(() => {
-    if (isError) {
-      console.log('Invalid Credentials');
-    }
-
     if (isSuccess || user) {
       navigate('/')
     }
 
-    dispatch(reset())
+
+    setTimeout(() => {
+      dispatch(reset())
+    }, 3000);
+
   }, [user, isError, isSuccess, message, navigate, dispatch])
 
   const handleChange = (e) => {
@@ -49,15 +52,16 @@ const LoginScreen = () => {
     }
 
     dispatch(login(userData))
+
   }
 
   if (isLoading) {
     return <Spinner />
   }
 
-
   return (
     <FormContainer>
+      {isError && <Message variant="danger">{message}</Message>}
       <h1>Sign In</h1>
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="email">
