@@ -47,6 +47,8 @@ const RegisterScreen = () => {
 
     if (password !== password2) {
       setAlert('Passwords do not match')
+    } else if (password.length < 6) {
+      setAlert('Password must be at least 6 characters')
     } else {
       const userData = {
         name,
@@ -56,6 +58,7 @@ const RegisterScreen = () => {
 
       dispatch(register(userData))
     }
+
   }
 
   if (isLoading) {
