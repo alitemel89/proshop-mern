@@ -85,11 +85,10 @@ const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='email'>
+        <Form.Group>
           <Form.Label>Email Address</Form.Label>
           <Form.Control
             type='email'
-            className='form-control'
             id='email'
             name='email'
             value={email}
@@ -98,11 +97,10 @@ const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='password'>
+        <Form.Group>
           <Form.Label>Password</Form.Label>
           <Form.Control
             type='password'
-            className='form-control'
             id='password'
             name='password'
             value={password}
@@ -111,11 +109,10 @@ const RegisterScreen = () => {
           ></Form.Control>
         </Form.Group>
 
-        <Form.Group controlId='confirmPassword'>
+        <Form.Group>
           <Form.Label>Confirm Password</Form.Label>
           <Form.Control
             type='password'
-            className='form-control'
             id='password2'
             name='password2'
             value={password2}
