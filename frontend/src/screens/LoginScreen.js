@@ -29,7 +29,6 @@ const LoginScreen = () => {
       navigate('/shipping')
     }
 
-
     setTimeout(() => {
       dispatch(reset())
     }, 3000);
