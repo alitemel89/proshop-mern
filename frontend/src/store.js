@@ -8,8 +8,9 @@ export default configureStore({
   reducer: {
     [productsApi.reducerPath]: productsApi.reducer,
     cart: cartReducer,
-    auth: authReducer
+    auth: authReducer,
   },
+  
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({}).concat(productsApi.middleware)
 })

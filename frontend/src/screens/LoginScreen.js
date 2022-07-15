@@ -26,7 +26,7 @@ const LoginScreen = () => {
 
   useEffect(() => {
     if (isSuccess || user) {
-      navigate('/')
+      navigate('/shipping')
     }
 
 
