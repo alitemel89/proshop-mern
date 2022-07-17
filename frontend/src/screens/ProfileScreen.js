@@ -29,13 +29,15 @@ const ProfileScreen = () => {
     if (!userInfo) {
       navigate('/login')
     } else {
-      if (!userInfo || !userInfo.name || isSuccess) {
+      if (!userInfo) {
         dispatch(getUserDetails('profile'))
       } else {
         setName(userInfo.name)
         setEmail(userInfo.email)
       }
     }
+
+    
   }, [dispatch, userInfo, isSuccess, navigate])
 
   

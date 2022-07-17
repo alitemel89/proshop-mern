@@ -13,5 +13,6 @@ export default configureStore({
   },
   
   middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({}).concat(productsApi.middleware)
+    getDefaultMiddleware({
+    }).concat(productsApi.middleware)
 })
